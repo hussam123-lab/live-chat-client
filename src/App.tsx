@@ -1,12 +1,18 @@
 import { Box } from '@mui/material';
-import OptionsPanel from 'components/global/OptionsPanel';
-import React from 'react';
+import ChatPage from 'components/ChatWindow/ChatPage';
+import MyForm from 'components/start/SignUpPage';
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 
 function App() {
+  const [user, setUser] = useState('null')
   return (
     <React.Fragment>
-      <OptionsPanel />
+      <Routes>
+        <Route path="/" element={<MyForm setUser={setUser} />} />
+        <Route path="chat" element={<ChatPage />} />
+      </Routes>
     </React.Fragment>
   );
 }
