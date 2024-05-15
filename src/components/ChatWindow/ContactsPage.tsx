@@ -3,9 +3,10 @@ import Box from '@mui/material/Box';
 import { Button } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import ContactsModal from 'components/modals/ContactsModal';
-import { User } from "types/users";
-const ContactsPage = () => {
+import { UserObject } from "types/users";
+const ContactsPage = ({ user }: { user: UserObject }) => {
     const [open, setOpen] = React.useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     return (
@@ -20,7 +21,7 @@ const ContactsPage = () => {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <ContactsModal />
+                <ContactsModal user={user} setOpen={setOpen} />
             </Modal>
         </div>
     );

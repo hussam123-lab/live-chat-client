@@ -1,11 +1,18 @@
 import { Box, Button, TextField } from '@mui/material';
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
+import { add_contact } from 'services/contactsServices';
+import { UserObject } from 'types/users';
 
-function ContactsModal() {
+const ContactsModal = ({ user, setOpen }: { user: UserObject, setOpen: Dispatch<SetStateAction<boolean>> }) => {
     const [phone, setPhone] = useState('');
     const handlePhoneChange = (event) => {
         setPhone(event.target.value);
     };
+
+    const submit_add_contact = async () => {
+        await add_contact(user, { 'phone_number': phone })
+        setOpen(false)
+    }
     return (
         <Box sx={{
             bgcolor: 'background.paper',
@@ -30,6 +37,7 @@ function ContactsModal() {
                 variant="contained"
                 color="primary"
                 type="button"
+                onClick={submit_add_contact}
             >
                 Add Contact
             </Button>

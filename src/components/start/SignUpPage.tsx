@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import { create_user } from 'services/contactsServices';
+import { validateUser } from 'services/validationServices';
 
 const MyForm = ({ setUser }) => {
     // State variables for the name and password
@@ -31,9 +32,10 @@ const MyForm = ({ setUser }) => {
         console.log('Submitted Password:', password);
         try {
             const user = await create_user({ name: name, password: password, phone_number: phone })
-            setUser(user)
-            console.log(user)
-            navigate('/chat'); // Navigate to /chat on form submission
+            if (user) {
+                    setUser(user);
+                    navigate('/chat');
+                }
         }
         catch (error) {
             console.error('Failed to create user:', error);
@@ -41,9 +43,14 @@ const MyForm = ({ setUser }) => {
     };
 
     // Function for login button
-    const handleLogin = () => {
+    const handleLogin = async () => {
         console.log('Login action here');
-        navigate('/chat'); // Navigate to /chat on login click
+        const user = await validateUser({ name: name, password: password, phone_number: phone })
+        if (user) {
+            setUser(user);
+            navigate('/chat');
+        }
+        // navigate('/chat'); // Navigate to /chat on login click
     };
 
     return (
@@ -92,7 +99,7 @@ const MyForm = ({ setUser }) => {
                     color="primary"
                     type="submit"
                 >
-                    Submit
+                    Sign Up
                 </Button>
                 <Button
                     variant="contained"

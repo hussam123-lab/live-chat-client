@@ -6,12 +6,12 @@ import { Route, Routes } from 'react-router-dom';
 
 
 function App() {
-  const [user, setUser] = useState('null')
+  const [user, setUser] = useState(null)
   return (
     <React.Fragment>
       <Routes>
         <Route path="/" element={<MyForm setUser={setUser} />} />
-        <Route path="chat" element={<ChatPage />} />
+        <Route path="chat" element={<ChatPage user={user} />} />
       </Routes>
     </React.Fragment>
   );
