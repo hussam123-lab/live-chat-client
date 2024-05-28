@@ -1,14 +1,17 @@
 import OptionsPanel from 'components/global/OptionsPanel';
-import { User, UserObject } from "types/users";
+import ChatPanel from 'components/ChatPage/ChatPanel';
+import { User } from "types/users";
 import ContactsPage from './ContactsPage';
 import { Box } from '@mui/material';
-const ChatPage = ({ user }: { user: UserObject }) => {
+import { Dispatch, SetStateAction } from 'react';
+const ChatPage = ({ user, setUser }: { user: User, setUser: Dispatch<SetStateAction<User>> }) => {
 
 
 
     return (<Box sx={{ display: 'flex' }}>
         <OptionsPanel />
-        <ContactsPage user={user} />
+        <ContactsPage user={user} setUser={setUser} />
+        <ChatPanel />
     </Box>);
 }
 

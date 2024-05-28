@@ -1,16 +1,17 @@
 import { Box, Button, TextField } from '@mui/material';
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { add_contact } from 'services/contactsServices';
-import { UserObject } from 'types/users';
+import { User } from 'types/users';
 
-const ContactsModal = ({ user, setOpen }: { user: UserObject, setOpen: Dispatch<SetStateAction<boolean>> }) => {
+const ContactsModal = ({ user, setOpen, setUser }: { user: User, setOpen: Dispatch<SetStateAction<boolean>>, setUser: Dispatch<SetStateAction<User>> }) => {
     const [phone, setPhone] = useState('');
     const handlePhoneChange = (event) => {
         setPhone(event.target.value);
     };
 
     const submit_add_contact = async () => {
-        await add_contact(user, { 'phone_number': phone })
+        const user_new = await add_contact(user, { 'phone_number': phone })
+        setUser(user_new)
         setOpen(false)
     }
     return (

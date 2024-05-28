@@ -11,7 +11,7 @@ function App() {
     <React.Fragment>
       <Routes>
         <Route path="/" element={<MyForm setUser={setUser} />} />
-        <Route path="chat" element={<ChatPage user={user} />} />
+        <Route path="chat" element={<ChatPage user={user} setUser={setUser} />} />
       </Routes>
     </React.Fragment>
   );
